@@ -15,3 +15,4 @@ export * from './service';
 export * from './update-command';
 export * from './delete-command';
 export * from './auth-user';
+export * from './database';
