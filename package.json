@@ -16,7 +16,7 @@
     "rxjs": "^6.6.7",
     "yup": "^0.32.9"
   },
-  "description": "Add more functions into the original pg package",
+  "description": "Core functions to build API server with nodejs &amp; Graphql. The package is written in Typescript",
   "devDependencies": {
     "@babel/cli": "^7.13.14",
     "@babel/core": "^7.13.14",
