@@ -1,2 +1,5 @@
 import type { ApolloServerExpressConfig } from 'apollo-server-express';
-export declare const contextFactory: ApolloServerExpressConfig['context'];
+import * as firebaseAdmin from 'firebase-admin';
+export declare const contextFactory: (deps: {
+    firebaseApp: firebaseAdmin.app.App;
+}) => ApolloServerExpressConfig['context'];

@@ -3,22 +3,21 @@ import type {AuthUser} from '@lib/interfaces';
 
 import * as firebaseAdmin from 'firebase-admin';
 
-const convertTokenToAuthUser = (token: string): Promise<{user: AuthUser}> =>
-  token
-    ? firebaseAdmin
-        .auth()
-        .verifyIdToken(token)
-        .then((decodedIdToken) =>
-          decodedIdToken.id
-            ? {
-                user: {
-                  id: decodedIdToken.id,
-                },
-              }
-            : undefined,
-        )
-        .catch(() => ({user: undefined}))
-    : undefined;
-
-export const contextFactory: ApolloServerExpressConfig['context'] = ({req}) =>
-  convertTokenToAuthUser(req.headers.authorization);
+export const contextFactory: (deps: {firebaseApp: firebaseAdmin.app.App}) => ApolloServerExpressConfig['context'] = ({
+  firebaseApp,
+}) => ({req}): Promise<{user: AuthUser}> =>
+  firebaseApp
+    .auth()
+    .verifyIdToken(req.headers.authorization || '')
+    .then((decodedIdToken) =>
+      decodedIdToken.id
+        ? {
+            user: {
+              id: decodedIdToken.id,
+              roles: decodedIdToken.roles,
+              permissions: decodedIdToken.permissions,
+            } as AuthUser,
+          }
+        : {user: undefined},
+    )
+    .catch(() => ({user: undefined}));
