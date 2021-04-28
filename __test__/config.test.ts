@@ -1,4 +1,4 @@
-import {config, updateConfig} from '@lib/config';
+import {config, updateConfig} from '@lib';
 
 describe('config', () => {
   it('uses the default config', () => {
@@ -6,8 +6,8 @@ describe('config', () => {
       Object {
         "APP_NAME": "API",
         "BUILD": "1",
-        "DEFAULT_ITEMS_PER_REQUEST": 10,
-        "MAX_ITEMS_PER_REQUEST": 50,
+        "DEFAULT_ITEMS_PER_PAGE": 10,
+        "MAX_ITEMS_PER_PAGE": 50,
         "VERSION": "0.1.0",
       }
     `);
@@ -23,8 +23,8 @@ describe('config', () => {
       Object {
         "APP_NAME": "Updated",
         "BUILD": "20",
-        "DEFAULT_ITEMS_PER_REQUEST": 10,
-        "MAX_ITEMS_PER_REQUEST": 50,
+        "DEFAULT_ITEMS_PER_PAGE": 10,
+        "MAX_ITEMS_PER_PAGE": 50,
         "VERSION": "0.2.0",
       }
     `);

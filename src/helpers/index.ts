@@ -7,4 +7,4 @@ export * from './validate-authenticated-user';
 export * from './validate-owner';
 export * from './context-factory';
 export * from './convert-search-term';
-export * from './add-created-by-field';
+export * from './add-fields';

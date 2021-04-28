@@ -1,10 +1,10 @@
 import type {AuthUser} from '@lib/interfaces';
 
-import {AuthenticationError} from 'apollo-server';
+import {ForbiddenError} from 'apollo-server';
 
-export const validateAuthenticatedUser = (user: AuthUser): void => {
+export const validateAuthenticatedUser = (user: AuthUser) => <T>(entity?: T): T => {
   if (user) {
-    return;
+    return entity;
   }
-  throw new AuthenticationError('User must be authenticated');
+  throw new ForbiddenError('User must be authenticated');
 };
