@@ -7,8 +7,8 @@ export const baseResolvers = (): Resolver => ({
   JSON: GraphQLJSON,
   Query: {
     _: (): string => '',
-    version: (): string => `${config.VERSION}.${config.BUILD}`,
-    appName: (): string => config.APP_NAME,
+    version: (): string => `${config().VERSION}.${config().BUILD}`,
+    appName: (): string => config().APP_NAME,
   },
   Mutation: {
     _: (): string => '',

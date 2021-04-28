@@ -4,5 +4,4 @@ export type Configuration = Readonly<{
   BUILD: string;
   DEFAULT_ITEMS_PER_REQUEST: number;
   MAX_ITEMS_PER_REQUEST: number;
-  STRING_MAX_LENGTH: number;
 }>;
