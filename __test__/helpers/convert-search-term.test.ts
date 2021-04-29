@@ -5,6 +5,11 @@ describe('convertSearchTerm', () => {
     const searchTerm = convertSearchTerm('Book and library @# !@% hay');
     expect(searchTerm).toMatchInlineSnapshot(`"Book & and & library & hay"`);
   });
+
+  it('converts blank string', () => {
+    const searchTerm = convertSearchTerm('');
+    expect(searchTerm).toMatchInlineSnapshot(`""`);
+  });
 });
 
 export {};

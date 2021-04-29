@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type {GraphQLResolveInfo} from 'graphql';
 import type {Entity} from './entity';
 import type {Query} from './query';
@@ -8,4 +9,4 @@ export type QueryResolver<
   E extends Entity<Id> = Entity<Id>,
   Q extends Query = Query,
   R extends QueryResult<E> | E = QueryResult<E> | E
-> = (parent: never, args: {query: Q}, context: never, info: GraphQLResolveInfo) => Promise<R>;
+> = (parent: any, args: {query: Q}, context: any, info: GraphQLResolveInfo) => Promise<R>;
