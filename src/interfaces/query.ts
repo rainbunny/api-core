@@ -16,7 +16,9 @@ export interface OffsetQuery extends Query {
 }
 
 export interface CursorQuery extends Query {
-  nextToken?: string;
+  rowsPerPage?: number;
+  nextPage?: string;
+  prevPage?: string;
 }
 
 export interface GetByIdQuery<Id = string> {
