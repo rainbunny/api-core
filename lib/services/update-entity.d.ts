@@ -1,6 +1,6 @@
 import type { Observable } from 'rxjs';
 import type { SchemaOf } from 'yup';
-import type { AuthUser, Entity, WriteRepository } from '@lib/interfaces';
+import type { AuthUser, Entity, Fields, WriteRepository } from '@lib/interfaces';
 export declare const updateEntity: <Id = string, E extends Entity<Id> = Entity<Id>>(params: {
     entity: {
         id: Id;
@@ -13,5 +13,5 @@ export declare const updateEntity: <Id = string, E extends Entity<Id> = Entity<I
         id: Id;
     } & Partial<E>>;
     user: AuthUser;
-    fields?: string[];
+    fields?: Fields;
 }) => Observable<void>;

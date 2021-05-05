@@ -8,6 +8,7 @@ export * from './context';
 export * from './command';
 export * from './command-handler';
 export * from './command-resolver';
+export * from './fields';
 export * from './configuration';
 export * from './read-repository';
 export * from './write-repository';

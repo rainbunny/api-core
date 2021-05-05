@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {convertHandlersToResolvers} from '@lib';
 
-import {of} from 'rxjs';
+const mockGraphqlFields = jest.fn();
+jest.mock('graphql-fields', () => jest.fn());
 
 describe('convertHandlersToResolvers', () => {
-  beforeEach(() => {});
   it('converts service handlers to graphql resolvers', async () => {
-    jest.mock('graphql-fields', () => () => ({
-      data: {},
-    }));
     const sampleQuery = () => ({
       toPromise: jest.fn().mockReturnValue({data: [{id: '1', name: 'Thinh'}], pagination: {totalCount: 1}}),
+    });
+    const sampleCommand = () => ({
+      toPromise: jest.fn().mockReturnValue('1'),
     });
     const resolvers = convertHandlersToResolvers({
       Query: {
@@ -18,16 +18,20 @@ describe('convertHandlersToResolvers', () => {
       },
       Mutation: {
         sampleEntity: {
-          sampleCommandHandler: () => of([]),
+          sampleCommand: sampleCommand as any,
         },
+      },
+    });
+    mockGraphqlFields.mockReturnValue({
+      data: {},
+      pagination: {
+        totalCount: {},
       },
     });
     const queryResult = resolvers.Query.sampleQuery(
       {},
       {
-        query: {
-          fields: ['id', 'name'],
-        },
+        query: {},
       },
       {},
       {} as any,
@@ -45,6 +49,19 @@ describe('convertHandlersToResolvers', () => {
         },
       }
     `);
+    mockGraphqlFields.mockReturnValue({
+      payload: {},
+    });
+    const commandResult = resolvers.Mutation.sampleEntity().sampleCommand(
+      {
+        payload: {},
+      },
+      {
+        user: {id: 'id'},
+      },
+      {} as any,
+    );
+    expect(commandResult).toMatchInlineSnapshot(`"1"`);
   });
 });
 

@@ -31,7 +31,7 @@ const convertQueryHandlerToResolver = <
   queryHandler: QueryHandler<Id, E, Q, Result>,
 ): QueryResolver<Id, E, Q, Result> => (_parent, args, context, info) => {
   const fields = graphqlFields(info, {}, {processArguments: true});
-  return queryHandler({...args.query, fields: Object.keys(fields.data ? fields.data : fields)}, context).toPromise();
+  return queryHandler({...args.query, fields}, context).toPromise();
 };
 
 const mapQueryHandlerPairsToResolverPairs: (
@@ -54,9 +54,14 @@ const mergeCommandResolverPairsToObject: (
   pairs: [string, CommandResolver][],
 ) => {[entityName: string]: CommandResolver} = _.reduce((acc, element) => ({...acc, [element[0]]: element[1]}), {});
 
-const convertCommandHandlerToResolver = <C extends Command>(
-  commandHandler: CommandHandler<C>,
-): CommandResolver<C> => async (args, context, _info) => commandHandler(args.payload, context).toPromise();
+const convertCommandHandlerToResolver = <C extends Command>(commandHandler: CommandHandler<C>): CommandResolver<C> => (
+  args,
+  context,
+  info,
+) => {
+  const fields = graphqlFields(info, {}, {processArguments: true});
+  return commandHandler({...args.payload, fields}, context).toPromise();
+};
 
 const mapCommandHandlerPairsToResolverPairs: (
   list: [string, CommandHandler][],

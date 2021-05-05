@@ -1,16 +1,18 @@
+import {Fields} from './fields';
+
 export type SortOrder = 'ASC' | 'DESC';
 
 export type Query = {
   queryId?: string;
   queryType?: string;
-  fields: string[];
+  fields?: Fields;
   /** example: ['name|DESC', 'createdAt|ASC'] */
   sortBy?: string[];
 };
 
 export interface OffsetQuery extends Query {
   pageIndex?: number;
-  itemsPerPage?: number;
+  rowsPerPage?: number;
 }
 
 export interface CursorQuery extends Query {
@@ -19,5 +21,5 @@ export interface CursorQuery extends Query {
 
 export interface GetByIdQuery<Id = string> {
   id: Id;
-  fields: string[];
+  fields?: Fields;
 }

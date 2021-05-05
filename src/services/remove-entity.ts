@@ -1,5 +1,5 @@
 import type {Observable} from 'rxjs';
-import type {Entity, WriteRepository} from '@lib/interfaces';
+import type {Entity, Fields, WriteRepository} from '@lib/interfaces';
 
 import {of} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
@@ -9,9 +9,9 @@ export const removeEntity: <Id = string, E extends Entity<Id> = Entity<Id>>(para
   id: Id;
   repository: WriteRepository<Id, E>;
   validatePermission?: (entity: {id: Id} & Partial<E>) => Observable<{id: Id} & Partial<E>>;
-  fields?: string[];
+  fields?: Fields;
 }) => Observable<void> = ({id, repository, validatePermission, fields}) =>
-  repository.getById({id, fields: fields || ['id', 'createdBy']}).pipe(
+  repository.getById({id, fields: fields || {id: {}, createdBy: {}}}).pipe(
     map(validateEntityExist),
     switchMap((entity) => (validatePermission ? validatePermission(entity) : of(entity))),
     map(() => id),
