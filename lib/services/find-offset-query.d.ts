@@ -6,4 +6,5 @@ export declare const findOffsetQuery: <Id = string, E extends Entity<Id> = Entit
     defaultQuery?: Partial<Q>;
     repository: ReadRepository<Id, E>;
     querySchema: SchemaOf<unknown>;
+    validatePermission?: (query: Q) => Observable<void>;
 }) => Observable<OffsetQueryResult<Id, E>>;

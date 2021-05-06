@@ -1,5 +1,6 @@
 export * from './convert-handlers-to-resolvers';
 export * from './sanitize-offset-query';
+export * from './sanitize-cursor-query';
 export * from './validate-schema';
 export * from './validate-id';
 export * from './validate-entity-exist';

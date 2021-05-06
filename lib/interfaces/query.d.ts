@@ -12,7 +12,9 @@ export interface OffsetQuery extends Query {
     rowsPerPage?: number;
 }
 export interface CursorQuery extends Query {
-    nextToken?: string;
+    rowsPerPage?: number;
+    nextPage?: string;
+    prevPage?: string;
 }
 export interface GetByIdQuery<Id = string> {
     id: Id;
