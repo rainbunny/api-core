@@ -8,12 +8,11 @@ import {validateEntityExist} from '@lib/helpers';
 export const removeEntity: <Id = string, E extends Entity<Id> = Entity<Id>>(params: {
   id: Id;
   repository: WriteRepository<Id, E>;
-  validatePermission?: (entity: {id: Id} & Partial<E>) => Observable<{id: Id} & Partial<E>>;
   fields?: Fields;
+  validatePermission?: (entity: {id: Id} & Partial<E>) => Observable<{id: Id} & Partial<E>>;
 }) => Observable<void> = ({id, repository, validatePermission, fields}) =>
   repository.getById({id, fields: fields || {id: {}, createdBy: {}}}).pipe(
     map(validateEntityExist),
     switchMap((entity) => (validatePermission ? validatePermission(entity) : of(entity))),
-    map(() => id),
-    switchMap(repository.remove),
+    switchMap((entity) => repository.remove(entity.id)),
   );
