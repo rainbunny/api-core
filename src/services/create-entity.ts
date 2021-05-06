@@ -10,9 +10,9 @@ export const createEntity: <Id = string, E extends Entity<Id> = Entity<Id>>(para
   entity: Omit<E, 'id'> & {id?: Id};
   repository: WriteRepository<Id, E>;
   schema: SchemaOf<unknown>;
-  validatePermission?: (entity: Omit<E, 'id'> & {id?: Id}) => Observable<void>;
-}) => Observable<Id> = ({entity, repository, schema, validatePermission}) =>
+  validatePermissions?: (entity: Omit<E, 'id'> & {id?: Id}) => Observable<void>;
+}) => Observable<Id> = ({entity, repository, schema, validatePermissions}) =>
   validateSchema<typeof entity>(schema)(entity).pipe(
-    switchMap((e) => (validatePermission ? validatePermission(e).pipe(map(() => e)) : of(e))),
+    switchMap((e) => (validatePermissions ? validatePermissions(e).pipe(map(() => e)) : of(e))),
     switchMap(repository.create),
   );

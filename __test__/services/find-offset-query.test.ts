@@ -136,17 +136,17 @@ describe('findOffsetQuery', () => {
       ),
       count: jest.fn().mockReturnValue(of(10)),
     };
-    const validatePermission = jest.fn().mockReturnValue(of({}));
+    const validatePermissions = jest.fn().mockReturnValue(of({}));
 
     findOffsetQuery({
       query,
       querySchema,
       repository,
       defaultQuery,
-      validatePermission,
+      validatePermissions,
     }).subscribe((result) => {
       expect(repository.find).toHaveBeenCalledWith(query);
-      expect(validatePermission).toHaveBeenCalledWith(query);
+      expect(validatePermissions).toHaveBeenCalledWith(query);
       expect(result).toMatchInlineSnapshot(`
         Object {
           "data": Object {

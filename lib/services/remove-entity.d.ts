@@ -4,7 +4,7 @@ export declare const removeEntity: <Id = string, E extends Entity<Id> = Entity<I
     id: Id;
     repository: WriteRepository<Id, E>;
     fields?: Fields;
-    validatePermission?: (entity: {
+    validatePermissions?: (entity: {
         id: Id;
     } & Partial<E>) => Observable<{
         id: Id;

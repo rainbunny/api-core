@@ -41,7 +41,7 @@ describe('removeEntity', () => {
       ),
       remove: jest.fn().mockReturnValue(of({})),
     };
-    const validatePermission = jest.fn().mockReturnValue(
+    const validatePermissions = jest.fn().mockReturnValue(
       of({
         id: 'c995e7d7-117a-417a-b767-aa59c50e1e0b',
         createdBy: '0be5eb0a-44c4-4d6e-82c1-a89aa8cbc9bc',
@@ -51,7 +51,7 @@ describe('removeEntity', () => {
     removeEntity({
       id,
       repository,
-      validatePermission,
+      validatePermissions,
     }).subscribe(() => {
       expect(repository.getById).toHaveBeenCalledWith({
         id,
@@ -60,7 +60,7 @@ describe('removeEntity', () => {
           id: {},
         },
       });
-      expect(validatePermission).toHaveBeenCalledWith({
+      expect(validatePermissions).toHaveBeenCalledWith({
         id: 'c995e7d7-117a-417a-b767-aa59c50e1e0b',
         createdBy: '0be5eb0a-44c4-4d6e-82c1-a89aa8cbc9bc',
       });

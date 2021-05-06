@@ -50,15 +50,15 @@ describe('getEntityById', () => {
         }),
       ),
     };
-    const validatePermission = jest.fn().mockReturnValue(of({}));
+    const validatePermissions = jest.fn().mockReturnValue(of({}));
 
     getEntityById({
       query,
       repository,
-      validatePermission,
+      validatePermissions,
     }).subscribe((result) => {
       expect(repository.getById).toHaveBeenCalledWith(query, 0);
-      expect(validatePermission).toHaveBeenCalledWith({
+      expect(validatePermissions).toHaveBeenCalledWith({
         id: 'c995e7d7-117a-417a-b767-aa59c50e1e0b',
         name: 'thinh',
       });

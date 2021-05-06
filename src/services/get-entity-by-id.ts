@@ -8,9 +8,9 @@ import {validateId} from '@lib/helpers';
 export const getEntityById: <Id = string, E extends Entity<Id> = Entity<Id>>(params: {
   query: GetByIdQuery<Id>;
   repository: ReadRepository<Id, E> | WriteRepository<Id, E>;
-  validatePermission?: (entity: E) => Observable<void>;
-}) => Observable<E> = ({query, repository, validatePermission}) =>
+  validatePermissions?: (entity: E) => Observable<void>;
+}) => Observable<E> = ({query, repository, validatePermissions}) =>
   validateId<typeof query['id']>(query).pipe(
     switchMap(repository.getById),
-    switchMap((entity) => (validatePermission ? validatePermission(entity).pipe(map(() => entity)) : of(entity))),
+    switchMap((entity) => (validatePermissions ? validatePermissions(entity).pipe(map(() => entity)) : of(entity))),
   );

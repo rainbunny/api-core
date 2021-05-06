@@ -7,7 +7,7 @@ export declare const updateEntity: <Id = string, E extends Entity<Id> = Entity<I
     } & Partial<E>;
     repository: WriteRepository<Id, E>;
     schema?: SchemaOf<unknown>;
-    validatePermission?: (entity: {
+    validatePermissions?: (entity: {
         id: Id;
     } & Partial<E>) => Observable<{
         id: Id;

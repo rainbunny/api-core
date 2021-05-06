@@ -9,10 +9,10 @@ export const removeEntity: <Id = string, E extends Entity<Id> = Entity<Id>>(para
   id: Id;
   repository: WriteRepository<Id, E>;
   fields?: Fields;
-  validatePermission?: (entity: {id: Id} & Partial<E>) => Observable<{id: Id} & Partial<E>>;
-}) => Observable<void> = ({id, repository, validatePermission, fields}) =>
+  validatePermissions?: (entity: {id: Id} & Partial<E>) => Observable<{id: Id} & Partial<E>>;
+}) => Observable<void> = ({id, repository, validatePermissions, fields}) =>
   repository.getById({id, fields: fields || {id: {}, createdBy: {}}}).pipe(
     map(validateEntityExist),
-    switchMap((entity) => (validatePermission ? validatePermission(entity) : of(entity))),
+    switchMap((entity) => (validatePermissions ? validatePermissions(entity) : of(entity))),
     switchMap((entity) => repository.remove(entity.id)),
   );

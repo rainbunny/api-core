@@ -41,16 +41,16 @@ describe('createEntity', () => {
     const repository = {
       create: jest.fn().mockReturnValue(of('id')),
     };
-    const validatePermission = jest.fn().mockReturnValue(of({}));
+    const validatePermissions = jest.fn().mockReturnValue(of({}));
 
     createEntity({
       entity,
       repository,
       schema,
-      validatePermission,
+      validatePermissions,
     }).subscribe((id) => {
       expect(repository.create).toHaveBeenCalledWith(entity, 0);
-      expect(validatePermission).toHaveBeenCalledWith(entity);
+      expect(validatePermissions).toHaveBeenCalledWith(entity);
       expect(id).toMatchInlineSnapshot(`"id"`);
       done();
     });

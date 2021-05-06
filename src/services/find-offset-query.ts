@@ -29,11 +29,11 @@ export const findOffsetQuery: <
   defaultQuery?: Partial<Q>;
   repository: ReadRepository<Id, E>;
   querySchema: SchemaOf<unknown>;
-  validatePermission?: (query: Q) => Observable<void>;
-}) => Observable<OffsetQueryResult<Id, E>> = ({query, repository, querySchema, validatePermission}) =>
+  validatePermissions?: (query: Q) => Observable<void>;
+}) => Observable<OffsetQueryResult<Id, E>> = ({query, repository, querySchema, validatePermissions}) =>
   of(query).pipe(
     map(sanitizeOffsetQuery),
     switchMap(validateSchema(querySchema)),
-    switchMap((q) => (validatePermission ? validatePermission(q).pipe(map(() => q)) : of(q))),
+    switchMap((q) => (validatePermissions ? validatePermissions(q).pipe(map(() => q)) : of(q))),
     switchMap(findInRepository(repository)),
   );

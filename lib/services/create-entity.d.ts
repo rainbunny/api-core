@@ -7,7 +7,7 @@ export declare const createEntity: <Id = string, E extends Entity<Id> = Entity<I
     };
     repository: WriteRepository<Id, E>;
     schema: SchemaOf<unknown>;
-    validatePermission?: (entity: Omit<E, 'id'> & {
+    validatePermissions?: (entity: Omit<E, 'id'> & {
         id?: Id;
     }) => Observable<void>;
 }) => Observable<Id>;

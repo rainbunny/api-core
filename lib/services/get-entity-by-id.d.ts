@@ -3,5 +3,5 @@ import type { Entity, GetByIdQuery, ReadRepository, WriteRepository } from '@lib
 export declare const getEntityById: <Id = string, E extends Entity<Id> = Entity<Id>>(params: {
     query: GetByIdQuery<Id>;
     repository: ReadRepository<Id, E> | WriteRepository<Id, E>;
-    validatePermission?: (entity: E) => Observable<void>;
+    validatePermissions?: (entity: E) => Observable<void>;
 }) => Observable<E>;

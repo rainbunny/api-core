@@ -65,13 +65,13 @@ describe('updateEntity', () => {
       update: jest.fn().mockReturnValue(of({})),
     };
 
-    const validatePermission = jest.fn().mockReturnValue(of(oldEntity));
+    const validatePermissions = jest.fn().mockReturnValue(of(oldEntity));
 
     updateEntity({
       entity,
       repository,
       user,
-      validatePermission,
+      validatePermissions,
     }).subscribe(() => {
       expect(repository.getById).toHaveBeenCalledWith({
         id: entity.id,
@@ -80,7 +80,7 @@ describe('updateEntity', () => {
           id: {},
         },
       });
-      expect(validatePermission).toHaveBeenCalledWith(oldEntity);
+      expect(validatePermissions).toHaveBeenCalledWith(oldEntity);
       expect(repository.update).toHaveBeenCalledWith(
         {
           createdBy: '0be5eb0a-44c4-4d6e-82c1-a89aa8cbc9bc',
