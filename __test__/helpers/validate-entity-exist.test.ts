@@ -1,5 +1,4 @@
-import {validateEntityExist} from '@lib';
-import {ValidationError} from 'apollo-server';
+import {validateEntityExist, ValidationError} from '@lib';
 
 describe('validateEntityExist', () => {
   it('runs normally with an existing entity', () => {

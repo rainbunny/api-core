@@ -1,6 +1,6 @@
 import type {AuthUser} from '@lib/interfaces';
 
-import {ForbiddenError} from 'apollo-server';
+import {ForbiddenError} from '@lib/errors';
 
 export const validatePermissions = ({
   user,

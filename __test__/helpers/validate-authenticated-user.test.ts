@@ -1,5 +1,4 @@
-import {validateAuthenticatedUser} from '@lib';
-import {ForbiddenError} from 'apollo-server';
+import {validateAuthenticatedUser, AuthenticationError} from '@lib';
 
 describe('validateAuthenticatedUser', () => {
   it('runs normally with an authenticated user', () => {
@@ -10,7 +9,7 @@ describe('validateAuthenticatedUser', () => {
 
   it('throws exception if not an authenticated user', () => {
     const book = {id: '1', name: 'Book 1'};
-    expect(() => validateAuthenticatedUser(undefined)(book)).toThrow(ForbiddenError);
+    expect(() => validateAuthenticatedUser(undefined)(book)).toThrow(AuthenticationError);
   });
 });
 

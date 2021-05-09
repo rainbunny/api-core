@@ -1,5 +1,4 @@
-import {validateId} from '@lib';
-import {ValidationError} from 'apollo-server';
+import {validateId, ValidationError} from '@lib';
 
 describe('validateId', () => {
   it('runs normally with an guid id', (done) => {

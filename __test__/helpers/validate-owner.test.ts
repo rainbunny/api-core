@@ -1,5 +1,4 @@
-import {validateOwner} from '@lib';
-import {ForbiddenError} from 'apollo-server';
+import {validateOwner, ForbiddenError} from '@lib';
 
 describe('validateOwner', () => {
   it('runs normally for the owner', () => {

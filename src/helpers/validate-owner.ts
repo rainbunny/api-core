@@ -1,6 +1,6 @@
 import type {AuthUser} from '@lib/interfaces';
 
-import {ForbiddenError} from 'apollo-server';
+import {ForbiddenError} from '@lib/errors';
 import {validateAuthenticatedUser} from './validate-authenticated-user';
 
 export const validateOwner = (user?: AuthUser) => <T extends {createdBy?: string}>(entity: T): T => {

@@ -1,5 +1,4 @@
-import {ForbiddenError} from 'apollo-server';
-import {validatePermissions} from '@lib';
+import {validatePermissions, ForbiddenError} from '@lib';
 
 describe('validatePermissions', () => {
   it('runs successfully with required roles', () => {

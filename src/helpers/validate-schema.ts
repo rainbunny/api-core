@@ -1,6 +1,6 @@
 import type {Observable} from 'rxjs';
 
-import {ValidationError} from 'apollo-server';
+import {ValidationError} from '@lib/errors';
 import * as Yup from 'yup';
 import {from, of} from 'rxjs';
 

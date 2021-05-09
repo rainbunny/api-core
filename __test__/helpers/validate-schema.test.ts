@@ -1,6 +1,5 @@
 import * as yup from 'yup';
-import {validateSchema} from '@lib';
-import {ValidationError} from 'apollo-server';
+import {validateSchema, ValidationError} from '@lib';
 
 describe('validateSchema', () => {
   it('runs normally with a valid entity', (done) => {

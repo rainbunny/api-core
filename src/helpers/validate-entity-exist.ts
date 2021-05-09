@@ -1,4 +1,4 @@
-import {ValidationError} from 'apollo-server';
+import {ValidationError} from '@lib/errors';
 
 export const validateEntityExist = <T>(entity: T): T => {
   if (entity) {
