@@ -1,9 +1,8 @@
 import type {Observable} from 'rxjs';
-import type {Entity, GetByIdQuery, ReadRepository, WriteRepository} from '@lib/interfaces';
-
 import {of} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
-import {validateId} from '@lib/helpers';
+import type {Entity, GetByIdQuery, ReadRepository, WriteRepository} from '../interfaces';
+import {validateId} from '../helpers';
 
 export const getEntityById: <Id = string, E extends Entity<Id> = Entity<Id>>(params: {
   query: GetByIdQuery<Id>;

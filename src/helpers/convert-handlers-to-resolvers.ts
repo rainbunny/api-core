@@ -1,3 +1,5 @@
+import _ from 'lodash/fp';
+import graphqlFields from 'graphql-fields';
 import type {
   Command,
   CommandHandler,
@@ -7,9 +9,7 @@ import type {
   QueryHandler,
   QueryResolver,
   QueryResult,
-} from '@lib/interfaces';
-import _ from 'lodash/fp';
-import graphqlFields from 'graphql-fields';
+} from '../interfaces';
 
 interface HandlerParams {
   Query: {[entityName: string]: QueryHandler};

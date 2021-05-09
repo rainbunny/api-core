@@ -1,8 +1,7 @@
 import type {Observable} from 'rxjs';
-
-import {ValidationError} from '@lib/errors';
 import * as Yup from 'yup';
 import {from, of} from 'rxjs';
+import {ValidationError} from '../errors';
 
 export const validateSchema = <T>(schema?: Yup.SchemaOf<unknown>) => (data: T): Observable<T> =>
   schema

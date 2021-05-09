@@ -1,5 +1,5 @@
-import {config} from '@lib/config';
-import {OffsetQuery} from '@lib/interfaces';
+import {config} from '../config';
+import {OffsetQuery} from '../interfaces';
 
 export const sanitizeOffsetQuery = <T extends OffsetQuery>(query: T): T => ({
   ...query,

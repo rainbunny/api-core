@@ -1,4 +1,4 @@
-import {ValidationError} from '@lib/errors';
+import {ValidationError} from '../errors';
 
 export const validateEntityExist = <T>(entity: T): T => {
   if (entity) {

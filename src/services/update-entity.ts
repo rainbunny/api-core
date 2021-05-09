@@ -1,10 +1,9 @@
 import type {Observable} from 'rxjs';
 import type {SchemaOf} from 'yup';
-import type {AuthUser, Entity, Fields, WriteRepository} from '@lib/interfaces';
-
 import {of} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
-import {validateSchema, validateEntityExist} from '@lib/helpers';
+import type {AuthUser, Entity, Fields, WriteRepository} from '../interfaces';
+import {validateSchema, validateEntityExist} from '../helpers';
 
 export const updateEntity: <Id = string, E extends Entity<Id> = Entity<Id>>(params: {
   entity: {id: Id} & Partial<E>;

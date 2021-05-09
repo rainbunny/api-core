@@ -12,7 +12,6 @@
     "noEmit": true,
     "paths": {
       "@lib": ["src"],
-      "@lib/*": ["src/*"],
       "@test/*": ["__tests__/*"]
     },
     "resolveJsonModule": true,

@@ -1,9 +1,8 @@
 import type {Observable} from 'rxjs';
-import type {Entity, Fields, WriteRepository} from '@lib/interfaces';
-
 import {of} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
-import {validateEntityExist} from '@lib/helpers';
+import type {Entity, Fields, WriteRepository} from '../interfaces';
+import {validateEntityExist} from '../helpers';
 
 export const removeEntity: <Id = string, E extends Entity<Id> = Entity<Id>>(params: {
   id: Id;

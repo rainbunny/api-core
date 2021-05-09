@@ -1,10 +1,9 @@
 import type {Observable} from 'rxjs';
-import type {Entity, WriteRepository} from '@lib/interfaces';
 import type {SchemaOf} from 'yup';
-
 import {of} from 'rxjs';
 import {switchMap, map} from 'rxjs/operators';
-import {validateSchema} from '@lib/helpers';
+import type {Entity, WriteRepository} from '../interfaces';
+import {validateSchema} from '../helpers';
 
 export const createEntity: <Id = string, E extends Entity<Id> = Entity<Id>>(params: {
   entity: Omit<E, 'id'> & {id?: Id};

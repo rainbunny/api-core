@@ -1,6 +1,5 @@
-import type {AuthUser} from '@lib/interfaces';
-
-import {ForbiddenError} from '@lib/errors';
+import type {AuthUser} from '../interfaces';
+import {ForbiddenError} from '../errors';
 
 export const validatePermissions = ({
   user,

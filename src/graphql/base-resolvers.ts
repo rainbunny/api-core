@@ -1,7 +1,6 @@
-import type {Resolver} from '@lib/interfaces';
-
 import {GraphQLJSON} from 'graphql-type-json';
-import {config} from '@lib/config';
+import type {Resolver} from '../interfaces';
+import {config} from '../config';
 
 export const baseResolvers = (): Resolver => ({
   JSON: GraphQLJSON,

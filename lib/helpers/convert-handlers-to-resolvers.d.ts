@@ -1,4 +1,4 @@
-import type { CommandHandler, CommandResolver, QueryHandler, QueryResolver } from '@lib/interfaces';
+import type { CommandHandler, CommandResolver, QueryHandler, QueryResolver } from '../interfaces';
 interface HandlerParams {
     Query: {
         [entityName: string]: QueryHandler;

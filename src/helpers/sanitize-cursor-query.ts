@@ -1,6 +1,5 @@
-import type {CursorQuery} from '@lib/interfaces';
-
-import {config} from '@lib/config';
+import type {CursorQuery} from '../interfaces';
+import {config} from '../config';
 
 export const sanitizeCursorQuery = <T extends CursorQuery>(query: T): T => ({
   ...query,

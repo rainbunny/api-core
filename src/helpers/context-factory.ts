@@ -1,7 +1,6 @@
 import type {ApolloServerExpressConfig} from 'apollo-server-express';
-import type {AuthUser} from '@lib/interfaces';
-
 import * as firebaseAdmin from 'firebase-admin';
+import type {AuthUser} from '../interfaces';
 
 export const contextFactory: (deps: {firebaseApp: firebaseAdmin.app.App}) => ApolloServerExpressConfig['context'] = ({
   firebaseApp,

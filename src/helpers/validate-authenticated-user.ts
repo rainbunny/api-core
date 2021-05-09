@@ -1,6 +1,5 @@
-import type {AuthUser} from '@lib/interfaces';
-
-import {AuthenticationError} from '@lib/errors';
+import type {AuthUser} from '../interfaces';
+import {AuthenticationError} from '../errors';
 
 export const validateAuthenticatedUser = (user: AuthUser) => <T>(entity?: T): T => {
   if (user) {

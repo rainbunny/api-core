@@ -1,6 +1,9 @@
-import type {Command, Context, Entity, GetByIdQuery, OffsetQueryResult, Query} from '@lib/interfaces';
 import type {Observable} from 'rxjs';
-import type {CursorQueryResult} from './query-result';
+import type {Command} from './command';
+import type {Context} from './context';
+import type {Entity} from './entity';
+import type {GetByIdQuery, Query} from './query';
+import type {OffsetQueryResult, CursorQueryResult} from './query-result';
 
 export interface Service<E extends Entity, QueryResult extends OffsetQueryResult<E> | CursorQueryResult<E>> {
   find?: (query: Query, context: Context) => Observable<QueryResult>;

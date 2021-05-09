@@ -1,4 +1,4 @@
-import type {Configuration} from '@lib/interfaces';
+import type {Configuration} from './interfaces';
 
 let privateConfig: Configuration = Object.freeze({
   APP_NAME: process.env.APP_NAME || 'API',

@@ -1,6 +1,6 @@
 import type { Observable } from 'rxjs';
-import type { Entity, OffsetQuery, OffsetQueryResult, ReadRepository } from '@lib/interfaces';
 import type { SchemaOf } from 'yup';
+import type { Entity, OffsetQuery, OffsetQueryResult, ReadRepository } from '../interfaces';
 export declare const findOffsetQuery: <Id = string, E extends Entity<Id> = Entity<Id>, Q extends OffsetQuery = OffsetQuery>(params: {
     query: Q;
     defaultQuery?: Partial<Q>;

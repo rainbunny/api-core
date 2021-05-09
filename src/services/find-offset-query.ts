@@ -1,10 +1,9 @@
 import type {Observable} from 'rxjs';
-import type {Entity, OffsetQuery, OffsetQueryResult, ReadRepository} from '@lib/interfaces';
 import type {SchemaOf} from 'yup';
-
 import {of, zip} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
-import {sanitizeOffsetQuery, validateSchema} from '@lib/helpers';
+import type {Entity, OffsetQuery, OffsetQueryResult, ReadRepository} from '../interfaces';
+import {sanitizeOffsetQuery, validateSchema} from '../helpers';
 
 const findInRepository = <Id = string, E extends Entity<Id> = Entity<Id>, Q extends OffsetQuery = OffsetQuery>(
   repository: ReadRepository<Id, E>,
