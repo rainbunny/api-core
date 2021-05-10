@@ -8,5 +8,5 @@ export type QueryResolver<
   Id = string,
   E extends Entity<Id> = Entity<Id>,
   Q extends Query = Query,
-  R extends QueryResult<E> | E = QueryResult<E> | E
+  R extends QueryResult<Id, E> | E = QueryResult<Id, E> | E
 > = (parent: any, args: {query: Q}, context: any, info: GraphQLResolveInfo) => Promise<R>;

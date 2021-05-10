@@ -26,7 +26,7 @@ const convertQueryHandlerToResolver = <
   Id = string,
   E extends Entity<Id> = Entity<Id>,
   Q extends Query = Query,
-  Result extends QueryResult<E> | E = QueryResult<E> | E
+  Result extends QueryResult<Id, E> | E = QueryResult<Id, E> | E
 >(
   queryHandler: QueryHandler<Id, E, Q, Result>,
 ): QueryResolver<Id, E, Q, Result> => (_parent, args, context, info) => {

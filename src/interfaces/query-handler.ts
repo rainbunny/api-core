@@ -8,5 +8,5 @@ export type QueryHandler<
   Id = string,
   E extends Entity<Id> = Entity<Id>,
   Q extends Query = Query,
-  R extends QueryResult<E> | E = QueryResult<E> | E
+  R extends QueryResult<Id, E> | E = QueryResult<Id, E> | E
 > = (query: Q, context: Context) => Observable<R>;
