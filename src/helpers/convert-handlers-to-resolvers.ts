@@ -1,15 +1,6 @@
 import _ from 'lodash/fp';
 import graphqlFields from 'graphql-fields';
-import type {
-  Command,
-  CommandHandler,
-  CommandResolver,
-  Entity,
-  Query,
-  QueryHandler,
-  QueryResolver,
-  QueryResult,
-} from '../interfaces';
+import type {Command, CommandHandler, CommandResolver, Query, QueryHandler, QueryResolver} from '../interfaces';
 
 interface HandlerParams {
   Query: {[entityName: string]: QueryHandler};
@@ -22,14 +13,12 @@ interface HandlerResult {
   [key: string]: unknown;
 }
 
-const convertQueryHandlerToResolver = <
-  Id = string,
-  E extends Entity<Id> = Entity<Id>,
-  Q extends Query = Query,
-  Result extends QueryResult<Id, E> | E = QueryResult<Id, E> | E
->(
-  queryHandler: QueryHandler<Id, E, Q, Result>,
-): QueryResolver<Id, E, Q, Result> => (_parent, args, context, info) => {
+const convertQueryHandlerToResolver = <Q extends Query = Query>(queryHandler: QueryHandler<Q>): QueryResolver<Q> => (
+  _parent,
+  args,
+  context,
+  info,
+) => {
   const fields = graphqlFields(info, {}, {processArguments: true});
   return queryHandler({...args.query, fields}, context).toPromise();
 };

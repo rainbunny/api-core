@@ -1,12 +1,11 @@
-import { Entity } from './entity';
 import { Query } from './query';
 import { QueryResolver } from './query-resolver';
-export interface Resolver<Id = string> {
+export interface Resolver {
     Query: {
-        [entityName: string]: QueryResolver<Id, Entity<Id>, Query> | unknown;
+        [entityName: string]: QueryResolver<Query> | unknown;
     };
     Mutation: {
-        [entityName: string]: QueryResolver<Id, Entity<Id>, Query> | unknown;
+        [entityName: string]: QueryResolver<Query> | unknown;
     };
     [key: string]: unknown;
 }
