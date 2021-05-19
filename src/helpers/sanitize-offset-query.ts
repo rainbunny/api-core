@@ -3,9 +3,9 @@ import {OffsetQuery} from '../interfaces';
 
 export const sanitizeOffsetQuery = <T extends OffsetQuery>(query: T): T => ({
   ...query,
-  pageIndex: Math.max(((query as unknown) as OffsetQuery).pageIndex || 0, 0),
+  pageIndex: Math.max((query as unknown as OffsetQuery).pageIndex || 0, 0),
   rowsPerPage: Math.min(
-    ((query as unknown) as OffsetQuery).rowsPerPage || config().DEFAULT_ROWS_PER_PAGE,
+    (query as unknown as OffsetQuery).rowsPerPage || config().DEFAULT_ROWS_PER_PAGE,
     config().MAX_ROWS_PER_PAGE,
   ),
 });

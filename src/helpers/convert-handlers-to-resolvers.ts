@@ -1,3 +1,4 @@
+import {lastValueFrom} from 'rxjs';
 import _ from 'lodash/fp';
 import graphqlFields from 'graphql-fields';
 import type {Command, CommandHandler, CommandResolver, Query, QueryHandler, QueryResolver} from '../interfaces';
@@ -13,48 +14,38 @@ interface HandlerResult {
   [key: string]: unknown;
 }
 
-const convertQueryHandlerToResolver = <Q extends Query = Query>(queryHandler: QueryHandler<Q>): QueryResolver<Q> => (
-  _parent,
-  args,
-  context,
-  info,
-) => {
-  const fields = graphqlFields(info, {}, {processArguments: true});
-  return queryHandler({...args.query, fields}, context).toPromise();
-};
+const convertQueryHandlerToResolver =
+  <Q extends Query = Query>(queryHandler: QueryHandler<Q>): QueryResolver<Q> =>
+  (_parent, args, context, info) => {
+    const fields = graphqlFields(info, {}, {processArguments: true});
+    return lastValueFrom(queryHandler({...args.query, fields}, context));
+  };
 
-const mapQueryHandlerPairsToResolverPairs: (
-  list: [string, QueryHandler][],
-) => [string, QueryResolver][] = _.map((pair) => [pair[0], convertQueryHandlerToResolver(pair[1])]);
-
-const mergeQueryResolverPairsToObject: (
-  pairs: [string, QueryResolver][],
-) => {[entityName: string]: QueryResolver} = _.reduce((acc, element) => ({...acc, [element[0]]: element[1]}), {});
-
-const convertQueryHandlers: (queryHandlers: {
-  [entityName: string]: QueryHandler;
-}) => {[entityName: string]: QueryResolver} = _.pipe(
-  _.toPairs,
-  mapQueryHandlerPairsToResolverPairs,
-  mergeQueryResolverPairsToObject,
+const mapQueryHandlerPairsToResolverPairs: (list: [string, QueryHandler][]) => [string, QueryResolver][] = _.map(
+  (pair) => [pair[0], convertQueryHandlerToResolver(pair[1])],
 );
 
-const mergeCommandResolverPairsToObject: (
-  pairs: [string, CommandResolver][],
-) => {[entityName: string]: CommandResolver} = _.reduce((acc, element) => ({...acc, [element[0]]: element[1]}), {});
+const mergeQueryResolverPairsToObject: (pairs: [string, QueryResolver][]) => {[entityName: string]: QueryResolver} =
+  _.reduce((acc, element) => ({...acc, [element[0]]: element[1]}), {});
 
-const convertCommandHandlerToResolver = <C extends Command>(commandHandler: CommandHandler<C>): CommandResolver<C> => (
-  args,
-  context,
-  info,
-) => {
-  const fields = graphqlFields(info, {}, {processArguments: true});
-  return commandHandler({...args.payload, fields}, context).toPromise();
-};
+const convertQueryHandlers: (queryHandlers: {[entityName: string]: QueryHandler}) => {
+  [entityName: string]: QueryResolver;
+} = _.pipe(_.toPairs, mapQueryHandlerPairsToResolverPairs, mergeQueryResolverPairsToObject);
 
-const mapCommandHandlerPairsToResolverPairs: (
-  list: [string, CommandHandler][],
-) => [string, CommandResolver][] = _.map((pair) => [pair[0], convertCommandHandlerToResolver(pair[1])]);
+const mergeCommandResolverPairsToObject: (pairs: [string, CommandResolver][]) => {
+  [entityName: string]: CommandResolver;
+} = _.reduce((acc, element) => ({...acc, [element[0]]: element[1]}), {});
+
+const convertCommandHandlerToResolver =
+  <C extends Command>(commandHandler: CommandHandler<C>): CommandResolver<C> =>
+  (args, context, info) => {
+    const fields = graphqlFields(info, {}, {processArguments: true});
+    return commandHandler({...args.payload, fields}, context).toPromise();
+  };
+
+const mapCommandHandlerPairsToResolverPairs: (list: [string, CommandHandler][]) => [string, CommandResolver][] = _.map(
+  (pair) => [pair[0], convertCommandHandlerToResolver(pair[1])],
+);
 
 const convertEntityCommandHandlersToEntityResolvers: (entityCommandHandlers: {
   [commandName: string]: CommandHandler;

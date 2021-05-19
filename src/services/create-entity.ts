@@ -1,7 +1,7 @@
-import type {Observable} from 'rxjs';
-import type {SchemaOf} from 'yup';
 import {of} from 'rxjs';
 import {switchMap, map} from 'rxjs/operators';
+import type {Observable} from 'rxjs';
+import type {SchemaOf} from 'yup';
 import type {Entity, WriteRepository} from '../interfaces';
 import {validateSchema} from '../helpers';
 

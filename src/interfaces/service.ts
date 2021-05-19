@@ -10,7 +10,7 @@ export interface Service<
   E extends Entity<Id> = Entity<Id>,
   QueryResult extends OffsetQueryResult<Id, E> | CursorQueryResult<Id, E> =
     | OffsetQueryResult<Id, E>
-    | CursorQueryResult<Id, E>
+    | CursorQueryResult<Id, E>,
 > {
   find?: (query: Query, context: Context) => Observable<QueryResult>;
   getById?: (query: GetByIdQuery, context: Context) => Observable<E | undefined>;

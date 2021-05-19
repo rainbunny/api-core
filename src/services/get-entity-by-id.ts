@@ -1,6 +1,6 @@
-import type {Observable} from 'rxjs';
 import {of} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
+import type {Observable} from 'rxjs';
 import type {Entity, GetByIdQuery, ReadRepository, WriteRepository} from '../interfaces';
 import {validateId} from '../helpers';
 
