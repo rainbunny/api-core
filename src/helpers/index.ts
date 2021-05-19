@@ -7,6 +7,5 @@ export * from './validate-entity-exist';
 export * from './validate-authenticated-user';
 export * from './validate-owner';
 export * from './validate-permissions';
-export * from './context-factory';
 export * from './convert-search-term';
 export * from './add-fields';
