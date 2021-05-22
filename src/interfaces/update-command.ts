@@ -1,3 +1,5 @@
-export interface UpdateCommand<Id = string> {
+import {Command} from './command';
+
+export interface UpdateCommand<Id = string> extends Command {
   id: Id;
 }
