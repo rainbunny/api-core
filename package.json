@@ -64,10 +64,10 @@
     "lint-fix": "prettier --write . && eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "prepare": "yarn build",
     "prepublishOnly": "yarn validate",
+    "preversion": "yarn build && yarn validate",
     "push": "git push && git push --tags",
     "test": "jest",
-    "validate": "yarn lint && yarn test",
-    "version": "yarn validate && git add -A src"
+    "validate": "yarn lint && yarn test"
   },
   "types": "lib/index.d.ts",
   "version": "0.3.0"
