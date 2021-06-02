@@ -1,4 +1,4 @@
-import type { RxExecutor, RxExtendedPoolClient } from '@thinhtran3588/pg-extensions';
+import type { RxExecutor, RxExtendedPoolClient } from '@tqt/pg-extensions';
 import type { Observable } from 'rxjs';
 export declare type Database = RxExecutor & {
     /** Execute transaction.
