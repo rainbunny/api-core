@@ -21,9 +21,12 @@ Core functions to build API server with nodejs &amp; Graphql. The package is wri
 **develop:**
 ![CI-develop](https://github.com/thinhtran3588/api-core/workflows/CI-develop/badge.svg?branch=develop)
 [![codecov](https://codecov.io/gh/thinhtran3588/api-core/branch/develop/graph/badge.svg)](https://codecov.io/gh/thinhtran3588/api-core/branch/develop)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=thinhtran3588_api-core&branch=develop&metric=alert_status)](https://sonarcloud.io/dashboard?id=thinhtran3588_api-core&branch=develop)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=thinhtran3588_api-core&branch=develop&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=thinhtran3588_api-core&branch=develop)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=thinhtran3588_api-core&branch=develop&metric=security_rating)](https://sonarcloud.io/dashboard?id=thinhtran3588_api-core&branch=develop)
 
 ## Installation
 
 ```bash
-yarn add @thinhtran3588/api-core
+yarn add @tqt/api-core
 ```
