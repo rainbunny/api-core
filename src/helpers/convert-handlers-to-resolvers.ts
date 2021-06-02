@@ -40,7 +40,7 @@ const convertCommandHandlerToResolver =
   <C extends Command>(commandHandler: CommandHandler<C>): CommandResolver<C> =>
   (args, context, info) => {
     const fields = graphqlFields(info, {}, {processArguments: true});
-    return commandHandler({...args.payload, fields}, context).toPromise();
+    return lastValueFrom(commandHandler({...args.payload, fields}, context));
   };
 
 const mapCommandHandlerPairsToResolverPairs: (list: [string, CommandHandler][]) => [string, CommandResolver][] = _.map(
