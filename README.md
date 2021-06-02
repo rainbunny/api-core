@@ -2,7 +2,7 @@
 
 Core functions to build API server with nodejs &amp; Graphql. The package is written in Typescript.
 
-![npm (scoped)](https://img.shields.io/npm/v/@thinhtran3588/api-core)
+![npm (scoped)](https://img.shields.io/npm/v/@tqt/api-core)
 ![Typed with TypeScript](https://flat.badgen.net/badge/icon/Typed?icon=typescript&label&labelColor=blue&color=555555)
 ![Eslint](https://badgen.net/badge/eslint/airbnb/ff5a5f?icon=airbnb)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
