@@ -1,4 +1,4 @@
-import type {RxExecutor, RxExtendedPoolClient} from '@rainbunny/pg-extensions';
+import type {RxExecutor, RxExtendedPoolClient} from '@tqt/pg-extensions';
 import type {Observable} from 'rxjs';
 
 export type Database = RxExecutor & {

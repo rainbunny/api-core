@@ -1,10 +1,10 @@
 {
   "author": "Thinh Tran",
   "bugs": {
-    "url": "https://github.com/rainbunny/api-core/issues"
+    "url": "https://github.com/thinhtran3588/api-core/issues"
   },
   "dependencies": {
-    "@rainbunny/pg-extensions": "^0.5.0",
+    "@tqt/pg-extensions": "^0.5.3",
     "apollo-server-core": "^ 2.24.1",
     "graphql": "^15.5.0",
     "graphql-fields": "^2.0.3",
@@ -43,7 +43,7 @@
   "files": [
     "lib/**/*"
   ],
-  "homepage": "https://github.com/rainbunny/api-core#readme",
+  "homepage": "https://github.com/thinhtran3588/api-core#readme",
   "keywords": [
     "pg",
     "postgres",
@@ -53,17 +53,16 @@
   ],
   "license": "MIT",
   "main": "lib/index.js",
-  "name": "@rainbunny/api-core",
+  "name": "@tqt/api-core",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rainbunny/api-core.git"
+    "url": "git+https://github.com/thinhtran3588/api-core.git"
   },
   "scripts": {
     "build": "rm -r -f lib && babel src --out-dir lib --extensions \".ts\" --source-maps inline --copy-files && tsc --project tsconfig.definition.json",
     "lint": "prettier --check . && eslint . --ext .js,.jsx,.ts,.tsx && tsc --noEmit",
     "lint-fix": "prettier --write . && eslint . --ext .js,.jsx,.ts,.tsx --fix",
-    "prepare": "yarn build",
-    "prepublishOnly": "yarn validate",
+    "prepublishOnly": "yarn build && yarn validate",
     "preversion": "yarn build && yarn validate",
     "push": "git push && git push --tags",
     "test": "jest",
