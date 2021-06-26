@@ -1,4 +1,3 @@
-import {lastValueFrom} from 'rxjs';
 import _ from 'lodash/fp';
 import graphqlFields from 'graphql-fields';
 import type {Command, CommandHandler, CommandResolver, Query, QueryHandler, QueryResolver} from '../interfaces';
@@ -18,7 +17,7 @@ const convertQueryHandlerToResolver =
   <Q extends Query = Query>(queryHandler: QueryHandler<Q>): QueryResolver<Q> =>
   (_parent, args, context, info) => {
     const fields = graphqlFields(info, {}, {processArguments: true});
-    return lastValueFrom(queryHandler({...args.query, fields}, context));
+    return queryHandler({...args.query, fields}, context);
   };
 
 const mapQueryHandlerPairsToResolverPairs: (list: [string, QueryHandler][]) => [string, QueryResolver][] = _.map(
@@ -40,7 +39,7 @@ const convertCommandHandlerToResolver =
   <C extends Command>(commandHandler: CommandHandler<C>): CommandResolver<C> =>
   (args, context, info) => {
     const fields = graphqlFields(info, {}, {processArguments: true});
-    return lastValueFrom(commandHandler({...args.payload, fields}, context));
+    return commandHandler({...args.payload, fields}, context);
   };
 
 const mapCommandHandlerPairsToResolverPairs: (list: [string, CommandHandler][]) => [string, CommandResolver][] = _.map(

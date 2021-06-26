@@ -1479,10 +1479,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@tqt/pg-extensions@^0.5.5":
-  version "0.5.5"
-  resolved "https://registry.yarnpkg.com/@tqt/pg-extensions/-/pg-extensions-0.5.5.tgz#654060f4353e037eb7f096700f01325b3ca65ba3"
-  integrity sha512-kc52O5MFbWwjFnnswPfxYK13m9vOT6WR45JKq/Oc6IqEKs8FDf4LGm1v3V3nYO6uo4QEkc7ryIRn8TN/8eoNag==
+"@tqt/pg-extensions@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@tqt/pg-extensions/-/pg-extensions-0.6.0.tgz#b3ea03d199e01f117ba6fd7c202c0f839781d5ad"
+  integrity sha512-tLiMeTaAy5SSuwhIY9eaKns95MfKzCACBHrT0W9d8u8l+SoWGtkQgk/SWjn/R/ddvLOP9NG6LMMrYmlHRYh1XQ==
   dependencies:
     pg "^8.6.0"
     rxjs "^7.0.1"
@@ -5812,13 +5812,6 @@ rxjs@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.0.1.tgz#5f41c4f991cea550471fc5d215727390103702c7"
   integrity sha512-wViQ4Vgps1xJwqWIBooMNN44usCSthL7wCUl4qWqrVjhGfWyVyXcxlYzfDKkJKACQvZMTOft/jJ3RkbwK1j9QQ==
-  dependencies:
-    tslib "~2.1.0"
-
-rxjs@^7.1.0:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.1.0.tgz#94202d27b19305ef7b1a4f330277b2065df7039e"
-  integrity sha512-gCFO5iHIbRPwznl6hAYuwNFld8W4S2shtSJIqG27ReWXo9IWrCyEICxUA+6vJHwSR/OakoenC4QsDxq50tzYmw==
   dependencies:
     tslib "~2.1.0"
 

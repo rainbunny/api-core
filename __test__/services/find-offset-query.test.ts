@@ -1,4 +1,3 @@
-import {of} from 'rxjs';
 import * as yup from 'yup';
 import {findOffsetQuery} from '@lib';
 
@@ -24,12 +23,12 @@ describe('findOffsetQuery', () => {
     });
     const repository = {
       find: jest.fn().mockReturnValue(
-        of({
+        Promise.resolve({
           data: [],
           pagination: {},
         }),
       ),
-      count: jest.fn().mockReturnValue(of(10)),
+      count: jest.fn().mockReturnValue(Promise.resolve(10)),
     };
 
     findOffsetQuery({
@@ -37,7 +36,7 @@ describe('findOffsetQuery', () => {
       querySchema,
       repository,
       defaultQuery,
-    }).subscribe((result) => {
+    }).then((result) => {
       expect(repository.find).toHaveBeenCalledWith(query);
       expect(repository.count).toHaveBeenCalledWith(query);
       expect(result).toMatchInlineSnapshot(`
@@ -75,12 +74,12 @@ describe('findOffsetQuery', () => {
     });
     const repository = {
       find: jest.fn().mockReturnValue(
-        of({
+        Promise.resolve({
           data: [],
           pagination: {},
         }),
       ),
-      count: jest.fn().mockReturnValue(of(10)),
+      count: jest.fn().mockReturnValue(Promise.resolve(10)),
     };
 
     findOffsetQuery({
@@ -88,7 +87,7 @@ describe('findOffsetQuery', () => {
       querySchema,
       repository,
       defaultQuery,
-    }).subscribe((result) => {
+    }).then((result) => {
       expect(repository.find).toHaveBeenCalledWith(query);
       expect(repository.count).not.toHaveBeenCalled();
       expect(result).toMatchInlineSnapshot(`
@@ -129,14 +128,14 @@ describe('findOffsetQuery', () => {
     });
     const repository = {
       find: jest.fn().mockReturnValue(
-        of({
+        Promise.resolve({
           data: [],
           pagination: {},
         }),
       ),
-      count: jest.fn().mockReturnValue(of(10)),
+      count: jest.fn().mockReturnValue(Promise.resolve(10)),
     };
-    const validatePermissions = jest.fn().mockReturnValue(of({}));
+    const validatePermissions = jest.fn().mockReturnValue(Promise.resolve({}));
 
     findOffsetQuery({
       query,
@@ -144,7 +143,7 @@ describe('findOffsetQuery', () => {
       repository,
       defaultQuery,
       validatePermissions,
-    }).subscribe((result) => {
+    }).then((result) => {
       expect(repository.find).toHaveBeenCalledWith(query);
       expect(validatePermissions).toHaveBeenCalledWith(query);
       expect(result).toMatchInlineSnapshot(`

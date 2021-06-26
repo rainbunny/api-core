@@ -11,7 +11,7 @@ describe('validateSchema', () => {
       id: yup.string().required().uuid(),
       name: yup.string().required().max(4000),
     });
-    validateSchema(schema)(input).subscribe((entity) => {
+    validateSchema(schema)(input).then((entity) => {
       expect(entity).toMatchInlineSnapshot(`
         Object {
           "id": "e92ff1be-a814-11eb-bcbc-0242ac130002",
@@ -31,11 +31,9 @@ describe('validateSchema', () => {
       id: yup.string().required().uuid(),
       name: yup.string().required().max(4000),
     });
-    validateSchema(schema)(input).subscribe({
-      error: (err) => {
-        expect(err).toBeInstanceOf(ValidationError);
-        done();
-      },
+    validateSchema(schema)(input).catch((err) => {
+      expect(err).toBeInstanceOf(ValidationError);
+      done();
     });
   });
 
@@ -44,7 +42,7 @@ describe('validateSchema', () => {
       id: 'e92ff1be-a814-11eb-bcbc-0242ac130002',
       name: '',
     };
-    validateSchema()(input).subscribe((entity) => {
+    validateSchema()(input).then((entity) => {
       expect(entity).toMatchInlineSnapshot(`
         Object {
           "id": "e92ff1be-a814-11eb-bcbc-0242ac130002",

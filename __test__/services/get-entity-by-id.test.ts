@@ -1,4 +1,3 @@
-import {of} from 'rxjs';
 import {getEntityById} from '@lib';
 
 describe('getEntityById', () => {
@@ -12,7 +11,7 @@ describe('getEntityById', () => {
     };
     const repository = {
       getById: jest.fn().mockReturnValue(
-        of({
+        Promise.resolve({
           id: 'c995e7d7-117a-417a-b767-aa59c50e1e0b',
           name: 'thinh',
         }),
@@ -22,8 +21,8 @@ describe('getEntityById', () => {
     getEntityById({
       query,
       repository,
-    }).subscribe((result) => {
-      expect(repository.getById).toHaveBeenCalledWith(query, 0);
+    }).then((result) => {
+      expect(repository.getById).toHaveBeenCalledWith(query);
       expect(result).toMatchInlineSnapshot(`
         Object {
           "id": "c995e7d7-117a-417a-b767-aa59c50e1e0b",
@@ -44,20 +43,20 @@ describe('getEntityById', () => {
     };
     const repository = {
       getById: jest.fn().mockReturnValue(
-        of({
+        Promise.resolve({
           id: 'c995e7d7-117a-417a-b767-aa59c50e1e0b',
           name: 'thinh',
         }),
       ),
     };
-    const validatePermissions = jest.fn().mockReturnValue(of({}));
+    const validatePermissions = jest.fn().mockReturnValue(Promise.resolve({}));
 
     getEntityById({
       query,
       repository,
       validatePermissions,
-    }).subscribe((result) => {
-      expect(repository.getById).toHaveBeenCalledWith(query, 0);
+    }).then((result) => {
+      expect(repository.getById).toHaveBeenCalledWith(query);
       expect(validatePermissions).toHaveBeenCalledWith({
         id: 'c995e7d7-117a-417a-b767-aa59c50e1e0b',
         name: 'thinh',

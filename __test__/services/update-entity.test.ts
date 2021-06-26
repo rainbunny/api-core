@@ -1,4 +1,3 @@
-import {of} from 'rxjs';
 import {updateEntity} from '@lib';
 
 describe('updateEntity', () => {
@@ -17,15 +16,15 @@ describe('updateEntity', () => {
       createdBy: '0be5eb0a-44c4-4d6e-82c1-a89aa8cbc9bc',
     };
     const repository = {
-      getById: jest.fn().mockReturnValue(of(oldEntity)),
-      update: jest.fn().mockReturnValue(of({})),
+      getById: jest.fn().mockReturnValue(Promise.resolve(oldEntity)),
+      update: jest.fn().mockReturnValue(Promise.resolve()),
     };
 
     updateEntity({
       entity,
       repository,
       user,
-    }).subscribe(() => {
+    }).then(() => {
       expect(repository.getById).toHaveBeenCalledWith({
         id: entity.id,
         fields: {
@@ -33,15 +32,12 @@ describe('updateEntity', () => {
           id: {},
         },
       });
-      expect(repository.update).toHaveBeenCalledWith(
-        {
-          createdBy: '0be5eb0a-44c4-4d6e-82c1-a89aa8cbc9bc',
-          id: 'c995e7d7-117a-417a-b767-aa59c50e1e0b',
-          lastModifiedBy: '0be5eb0a-44c4-4d6e-82c1-a89aa8cbc9bc',
-          name: 'thinh new',
-        },
-        0,
-      );
+      expect(repository.update).toHaveBeenCalledWith({
+        createdBy: '0be5eb0a-44c4-4d6e-82c1-a89aa8cbc9bc',
+        id: 'c995e7d7-117a-417a-b767-aa59c50e1e0b',
+        lastModifiedBy: '0be5eb0a-44c4-4d6e-82c1-a89aa8cbc9bc',
+        name: 'thinh new',
+      });
       done();
     });
   });
@@ -61,18 +57,18 @@ describe('updateEntity', () => {
       createdBy: '0be5eb0a-44c4-4d6e-82c1-a89aa8cbc9bc',
     };
     const repository = {
-      getById: jest.fn().mockReturnValue(of(oldEntity)),
-      update: jest.fn().mockReturnValue(of({})),
+      getById: jest.fn().mockReturnValue(Promise.resolve(oldEntity)),
+      update: jest.fn().mockReturnValue(Promise.resolve({})),
     };
 
-    const validatePermissions = jest.fn().mockReturnValue(of(oldEntity));
+    const validatePermissions = jest.fn().mockReturnValue(Promise.resolve(oldEntity));
 
     updateEntity({
       entity,
       repository,
       user,
       validatePermissions,
-    }).subscribe(() => {
+    }).then(() => {
       expect(repository.getById).toHaveBeenCalledWith({
         id: entity.id,
         fields: {
@@ -81,15 +77,12 @@ describe('updateEntity', () => {
         },
       });
       expect(validatePermissions).toHaveBeenCalledWith(oldEntity);
-      expect(repository.update).toHaveBeenCalledWith(
-        {
-          createdBy: '0be5eb0a-44c4-4d6e-82c1-a89aa8cbc9bc',
-          id: 'c995e7d7-117a-417a-b767-aa59c50e1e0b',
-          lastModifiedBy: '0be5eb0a-44c4-4d6e-82c1-a89aa8cbc9bc',
-          name: 'thinh new',
-        },
-        0,
-      );
+      expect(repository.update).toHaveBeenCalledWith({
+        createdBy: '0be5eb0a-44c4-4d6e-82c1-a89aa8cbc9bc',
+        id: 'c995e7d7-117a-417a-b767-aa59c50e1e0b',
+        lastModifiedBy: '0be5eb0a-44c4-4d6e-82c1-a89aa8cbc9bc',
+        name: 'thinh new',
+      });
       done();
     });
   });

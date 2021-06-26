@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {of} from 'rxjs';
 import {convertHandlersToResolvers} from '@lib';
 
 const mockGraphqlFields = jest.fn();
@@ -8,8 +7,8 @@ jest.mock('graphql-fields', () => jest.fn());
 describe('convertHandlersToResolvers', async () => {
   it('converts service handlers to graphql resolvers', async () => {
     const sampleResult = {data: [{id: '1', name: 'Thinh'}], pagination: {totalCount: 1}};
-    const sampleQuery = () => of(sampleResult);
-    const sampleCommand = () => of('1');
+    const sampleQuery = () => Promise.resolve(sampleResult);
+    const sampleCommand = () => Promise.resolve('1');
     const resolvers = convertHandlersToResolvers({
       Query: {
         sampleQuery: sampleQuery as any,

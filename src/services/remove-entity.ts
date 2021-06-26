@@ -1,6 +1,3 @@
-import {of} from 'rxjs';
-import {map, switchMap} from 'rxjs/operators';
-import type {Observable} from 'rxjs';
 import type {Entity, Fields, WriteRepository} from '../interfaces';
 import {validateEntityExist} from '../helpers';
 
@@ -8,10 +5,10 @@ export const removeEntity: <Id = string, E extends Entity<Id> = Entity<Id>>(para
   id: Id;
   repository: WriteRepository<Id, E>;
   fields?: Fields;
-  validatePermissions?: (entity: {id: Id} & Partial<E>) => Observable<{id: Id} & Partial<E>>;
-}) => Observable<void> = ({id, repository, validatePermissions, fields}) =>
-  repository.getById({id, fields: fields || {id: {}, createdBy: {}}}).pipe(
-    map(validateEntityExist),
-    switchMap((entity) => (validatePermissions ? validatePermissions(entity) : of(entity))),
-    switchMap((entity) => repository.remove(entity.id)),
-  );
+  validatePermissions?: (entity: {id: Id} & Partial<E>) => Promise<{id: Id} & Partial<E>>;
+}) => Promise<void> = ({id, repository, validatePermissions, fields}) =>
+  repository
+    .getById({id, fields: fields || {id: {}, createdBy: {}}})
+    .then(validateEntityExist)
+    .then((entity) => (validatePermissions ? validatePermissions(entity) : Promise.resolve(entity)))
+    .then((entity) => repository.remove(entity.id));

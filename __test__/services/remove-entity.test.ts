@@ -1,4 +1,3 @@
-import {of} from 'rxjs';
 import {removeEntity} from '@lib';
 
 describe('removeEntity', () => {
@@ -6,18 +5,18 @@ describe('removeEntity', () => {
     const id = 'c995e7d7-117a-417a-b767-aa59c50e1e0b';
     const repository = {
       getById: jest.fn().mockReturnValue(
-        of({
+        Promise.resolve({
           id: 'c995e7d7-117a-417a-b767-aa59c50e1e0b',
           createdBy: '0be5eb0a-44c4-4d6e-82c1-a89aa8cbc9bc',
         }),
       ),
-      remove: jest.fn().mockReturnValue(of({})),
+      remove: jest.fn().mockReturnValue(Promise.resolve({})),
     };
 
     removeEntity({
       id,
       repository,
-    }).subscribe(() => {
+    }).then(() => {
       expect(repository.getById).toHaveBeenCalledWith({
         id,
         fields: {
@@ -34,15 +33,15 @@ describe('removeEntity', () => {
     const id = 'c995e7d7-117a-417a-b767-aa59c50e1e0b';
     const repository = {
       getById: jest.fn().mockReturnValue(
-        of({
+        Promise.resolve({
           id: 'c995e7d7-117a-417a-b767-aa59c50e1e0b',
           createdBy: '0be5eb0a-44c4-4d6e-82c1-a89aa8cbc9bc',
         }),
       ),
-      remove: jest.fn().mockReturnValue(of({})),
+      remove: jest.fn().mockReturnValue(Promise.resolve({})),
     };
     const validatePermissions = jest.fn().mockReturnValue(
-      of({
+      Promise.resolve({
         id: 'c995e7d7-117a-417a-b767-aa59c50e1e0b',
         createdBy: '0be5eb0a-44c4-4d6e-82c1-a89aa8cbc9bc',
       }),
@@ -52,7 +51,7 @@ describe('removeEntity', () => {
       id,
       repository,
       validatePermissions,
-    }).subscribe(() => {
+    }).then(() => {
       expect(repository.getById).toHaveBeenCalledWith({
         id,
         fields: {

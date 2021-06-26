@@ -4,13 +4,12 @@
     "url": "https://github.com/thinhtran3588/api-core/issues"
   },
   "dependencies": {
-    "@tqt/pg-extensions": "^0.5.5",
+    "@tqt/pg-extensions": "^0.6.0",
     "apollo-server-core": "^2.25.0",
     "graphql": "^15.5.0",
     "graphql-fields": "^2.0.3",
     "graphql-type-json": "^0.3.2",
     "lodash": "^4.17.21",
-    "rxjs": "^7.1.0",
     "yup": "^0.32.9"
   },
   "description": "Core functions to build API server with nodejs &amp; Graphql. The package is written in Typescript",

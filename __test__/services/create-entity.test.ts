@@ -1,4 +1,3 @@
-import {of} from 'rxjs';
 import * as yup from 'yup';
 import {createEntity} from '@lib';
 
@@ -14,15 +13,15 @@ describe('createEntity', () => {
       username: yup.string().required(),
     });
     const repository = {
-      create: jest.fn().mockReturnValue(of('id')),
+      create: jest.fn().mockReturnValue(Promise.resolve('id')),
     };
 
     createEntity({
       entity,
       repository,
       schema,
-    }).subscribe((id) => {
-      expect(repository.create).toHaveBeenCalledWith({id: '', name: 'Thinh Tran', username: 'thinhtran'}, 0);
+    }).then((id) => {
+      expect(repository.create).toHaveBeenCalledWith({id: '', name: 'Thinh Tran', username: 'thinhtran'});
       expect(id).toMatchInlineSnapshot(`"id"`);
       done();
     });
@@ -39,17 +38,17 @@ describe('createEntity', () => {
       username: yup.string().required(),
     });
     const repository = {
-      create: jest.fn().mockReturnValue(of('id')),
+      create: jest.fn().mockReturnValue(Promise.resolve('id')),
     };
-    const validatePermissions = jest.fn().mockReturnValue(of({}));
+    const validatePermissions = jest.fn().mockReturnValue(Promise.resolve({}));
 
     createEntity({
       entity,
       repository,
       schema,
       validatePermissions,
-    }).subscribe((id) => {
-      expect(repository.create).toHaveBeenCalledWith(entity, 0);
+    }).then((id) => {
+      expect(repository.create).toHaveBeenCalledWith(entity);
       expect(validatePermissions).toHaveBeenCalledWith(entity);
       expect(id).toMatchInlineSnapshot(`"id"`);
       done();
